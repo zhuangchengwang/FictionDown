@@ -19,7 +19,7 @@ import (
 func Site() site.SiteA {
 	return site.SiteA{
 		Name:     "笔趣阁",
-		HomePage: "http://www.b520.cc/",
+		HomePage: "http://www.222biquge.com/",
 		Tags: func() []string {
 			return []string{
 				"盗版",
@@ -30,7 +30,9 @@ func Site() site.SiteA {
 		},
 		Match: []string{
 			`http://www\.b520\.cc/\d+_\d+/*`,
+			`http://www\.222biquge\.com/\d+_\d+/*`,
 			`http://www\.b520\.cc/\d+_\d+/\d+\.html/*`,
+			`http://www\.222biquge\.com/\d+_\d+/\d+\.html/*`,
 		},
 		BookInfo: func(body io.Reader) (s *store.Store, err error) {
 			doc, err := htmlquery.Parse(body)

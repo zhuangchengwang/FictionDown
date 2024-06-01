@@ -21,11 +21,11 @@ import (
 func Site() site.SiteA {
 	return site.SiteA{
 		Name:     "新八一中文网",
-		HomePage: "https://www.81new.net/",
+		HomePage: "https://www.81new.vip/",
 		Tags:     func() []string { return []string{"盗版", "优质书源"} },
 		Match: []string{
-			`https://www\.81new\.net/\d+/\d+/`,
-			`https://www\.81new\.net/\d+/\d+/d+\.html`,
+			`https://www\.81new\.vip/\d+/\d+/`,
+			`https://www\.81new\.vip/\d+/\d+/d+\.html`,
 		},
 		BookInfo: wwww81newcomBookInfo,
 		Chapter: func(ctx fcontext.Context) (content []string, err error) {
@@ -60,7 +60,7 @@ func Site() site.SiteA {
 			return M, nil
 		},
 		Search: func(s string) (result []site.ChaperSearchResult, err error) {
-			baseurl, err := url.Parse("https://www.81new.net/modules/article/search.php")
+			baseurl, err := url.Parse("https://www.81new.vip/modules/article/search.php")
 			if err != nil {
 				return
 			}

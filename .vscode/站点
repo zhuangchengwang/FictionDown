@@ -1,0 +1,30 @@
+https://www.ddyueshu.com/
+https://github.com/zhuangchengwang/FictionDown
+如何使用 github上面有文档
+
+# 支持的站点名称
+在sites里面的main.go中都有
+
+
+
+
+> ./FictionDown --url https://book.qidian.com/info/3249362 d # 获取正版信息
+
+# 有时会发生`not match volumes`的错误，请启用Chromedp或者PhantomJS
+# Use Chromedp
+> ./FictionDown --url https://book.qidian.com/info/3249362 -d chromedp d
+# Use PhantomJS
+> ./FictionDown --url https://book.qidian.com/info/3249362 -d phantomjs d
+
+> vim 一世之尊.FictionDown # 加入盗版小说链接
+> ./FictionDown -i 一世之尊.FictionDown d # 获取盗版内容
+# 爬取完毕就可以输出可阅读的文档了
+> ./FictionDown -i 一世之尊.FictionDown conv -f txt
+# 转换成epub有两种方式
+# 1.输出markdown，再用pandoc转换成epub
+> ./FictionDown -i 一世之尊.FictionDown conv -f md
+> pandoc -o 一世之尊.epub 一世之尊.md
+# 某些阅读器需要对章节进行定位,需要加上--epub-chapter-level=2
+> pandoc -o 一世之尊.epub --epub-chapter-level=2 一世之尊.md
+# 2.直接输出epub（调用Pandoc）
+> ./FictionDown -i 一世之尊.FictionDown conv -f epub

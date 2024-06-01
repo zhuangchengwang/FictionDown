@@ -43,5 +43,5 @@ Test*.yml
 
 node_modules
 dist
-
+FictionDown
 # End of https://www.gitignore.io/api/go
