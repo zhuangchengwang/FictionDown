@@ -12,11 +12,11 @@ import (
 func Site() site.SiteA {
 	return site.SiteA{
 		Name:     "全本小说网",
-		HomePage: "https://www.qb5.la/",
+		HomePage: "https://www.qb5.ac/",
 		Tags:     func() []string { return []string{"盗版", "优质书源"} },
 		Match: []string{
-			`https://www\.qb5\.la/book_\d+/`,
-			`https://www\.qb5\.la/book_\d+/\d+\.html`,
+			`https://www\.qb5\.ac/book_\d+/`,
+			`https://www\.qb5\.ac/book_\d+/\d+\.html`,
 		},
 		BookInfo: site.Type1BookInfo(
 			`//*[@id="info"]/h1/text()`,
@@ -24,9 +24,9 @@ func Site() site.SiteA {
 			`//*[@id="info"]/h1/small/a/text()`,
 			`//div[@class="zjbox"]/dl[@class="zjlist"]/dd/a`),
 		Chapter: site.Type1Chapter(`//*[@id="content"]/text()`),
-		Search: site.Type1SearchAfter("https://www.qb5.la/modules/article/search.php",
+		Search: site.Type1SearchAfter("https://www.qb5.ac/modules/article/search.php",
 			func(s string) *http.Request {
-				baseurl, err := url.Parse("https://www.qb5.la/modules/article/search.php")
+				baseurl, err := url.Parse("https://www.qb5.ac/modules/article/search.php")
 				if err != nil {
 					panic(err)
 				}

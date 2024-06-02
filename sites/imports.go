@@ -5,6 +5,7 @@ import (
 	"runtime"
 
 	"github.com/ma6254/FictionDown/site"
+	"github.com/ma6254/FictionDown/sites/bbiquge_la"
 	"github.com/ma6254/FictionDown/sites/cc_b520"
 	"github.com/ma6254/FictionDown/sites/co_shumil"
 	"github.com/ma6254/FictionDown/sites/com_ddyueshu"
@@ -32,4 +33,5 @@ func InitSites() {
 	addSiteFunc(la_qb5.Site)
 	addSiteFunc(net_81new.Site)
 	addSiteFunc(org_wanben.Site)
+	addSiteFunc(bbiquge_la.Site)
 }
