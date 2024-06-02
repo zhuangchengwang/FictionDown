@@ -19,7 +19,7 @@ import (
 func Site() site.SiteA {
 	return site.SiteA{
 		Name:     "笔趣阁",
-		HomePage: "http://www.bbiquge.la/",
+		HomePage: "https://www.bbiquge.la/",
 		Tags: func() []string {
 			return []string{
 				"盗版",
@@ -29,8 +29,8 @@ func Site() site.SiteA {
 			}
 		},
 		Match: []string{
-			`http://www\.bbiquge\.la/\d+_\d+/*`,
-			`http://www\.bbiquge\.la/\d+_\d+/\d+\.html/*`,
+			`https://www\.bbiquge\.la/book_\d+/`,
+			`https://www\.bbiquge\.la/book_\d+/\d+\.html`,
 		},
 		BookInfo: func(body io.Reader) (s *store.Store, err error) {
 			doc, err := htmlquery.Parse(body)
@@ -47,7 +47,7 @@ func Site() site.SiteA {
 			}
 			s.BookName = htmlquery.InnerText(nodeTitle[0])
 
-			nodeDesc := htmlquery.Find(doc, `//*[@id="intro"]/p`)
+			nodeDesc := htmlquery.Find(doc, `//*[@id="intro"]/text()`)
 			if len(nodeDesc) == 0 {
 				err = fmt.Errorf("No matching desc")
 				return
@@ -57,7 +57,7 @@ func Site() site.SiteA {
 				"<br/>", "\n",
 				-1)
 
-			var author = htmlquery.Find(doc, `//*[@id="info"]/p[1]`)
+			var author = htmlquery.Find(doc, `//*[@id="info"]/p[1]/a`)
 			s.Author = strings.TrimLeft(htmlquery.OutputHTML(author[0], false), "作\u00a0\u00a0\u00a0\u00a0者：")
 
 			nodeContent := htmlquery.Find(doc, `//*[@id="list"]/dl/dd/a`)
@@ -98,7 +98,7 @@ func Site() site.SiteA {
 			M := []string{}
 			//list
 			// nodeContent := htmlquery.Find(doc, `//div[@id="content"]/text()`)
-			nodeContent := htmlquery.Find(doc, `//div[@id="content"]/p`)
+			nodeContent := htmlquery.Find(doc, `//div[@id="content"]/text()[position() > 1]`)
 			if len(nodeContent) == 0 {
 				err = fmt.Errorf("No matching content")
 				return nil, err
@@ -112,7 +112,7 @@ func Site() site.SiteA {
 			return M, nil
 		},
 		Search: func(s string) (result []site.ChaperSearchResult, err error) {
-			baseurl, err := url.Parse("http://www.bbiquge.la/modules/article/search.php")
+			baseurl, err := url.Parse("https://www.bbiquge.la/modules/article/search.php")
 			if err != nil {
 				return
 			}
